@@ -35,11 +35,29 @@ public class CameraController : MonoBehaviour
     
     private void SetOffset()
     {
-        _zOffset = -1.5f + -_carRB.velocity.magnitude * 0.02f;
-        _offset.z = _zOffset;
+        _offset.z = -1.5f + -_carRB.velocity.magnitude * 0.02f;
 
-        _xOffset = Mathf.MoveTowards(_xOffset, -_carController.Steering, 0.02f);
-        _offset.x = _xOffset;
+        _offset.x = Mathf.MoveTowards(_offset.x, -_carController.Steering, 0.02f);
+    }
+    
+    private void SetOffsetOther()
+    {
+        _offset.z = -1.5f + -_carRB.velocity.magnitude * 0.02f;
+        _offset.x = Mathf.MoveTowards(_xOffset, -_carController.Steering, 0.02f);
+        _offset.x = car.transform.position.x + Mathf.Cos(0.1f) * (car.transform.position.x - transform.position.x) * _carController.Steering;
+
+        // var offsetBase = -1.5f + -_carRB.velocity.magnitude * 0.02f;
+        // var arc = 0.3f * offsetBase;
+        // var radius = offsetBase;
+        // var angle = arc / radius;
+        // // Move calculation to 0,0
+        // var v = transform.position - car.transform.position;
+        // var x = v.x * Mathf.Cos(angle) + v.z * Mathf.Sin(angle);
+        // var z = v.z * Mathf.Cos(angle) - v.x * Mathf.Sin(angle);
+        // //Move back to correct center
+        // var vb = new Vector3(x, 0, z) + car.transform.position;
+        // _offset.x = vb.x;
+        // _offset.z = vb.z;
     }
     
     
